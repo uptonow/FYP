@@ -11,7 +11,7 @@ int main()
 	capture.set(CAP_PROP_FRAME_WIDTH, 1280);
 	capture.set(CAP_PROP_FRAME_HEIGHT, 720);
 
-	for (int i = 0; i < 300; i++)
+	for (int i = 0; i < 200; i++)
 	{
 		if (capture.isOpened())
 		{
