@@ -7,33 +7,38 @@ using namespace cv;
 
 int main()
 {
-	VideoCapture capture(1);
+	VideoCapture capture(0);
 	capture.set(CAP_PROP_FRAME_WIDTH, 1280);
 	capture.set(CAP_PROP_FRAME_HEIGHT, 720);
-
-	for (int i = 0; i < 200; i++)
-	{
-		if (capture.isOpened())
-		{
-			Mat pic;
-			capture >> pic;
-			std::string img = "D:\\FYP\\PHOTO\\" + std::to_string((i + 1)) + ".bmp";
-			imwrite(img, pic);
-			//waitKey(5);
-		}
-		else
-			continue;
-	}
+	int count = 1;
+	Mat pic;
+	char start = 'n';
+	char finish = 'n';
 
 
 	while (1)
 	{
 		if (capture.isOpened())
 		{
-			Mat frame;
-			capture >> frame;
-			imshow("Read Canny Video", frame);
-			if (waitKey(10) >= 0)break;
+			std::cout << "Start? y/n" << std::endl;
+			std::cin >> start;
+			if (start == 'y' || start == 'Y')
+			{
+				for (int i = 0; i < 300; i++)
+				{
+					if (capture.isOpened())
+					{
+						capture >> pic;
+						std::string img = "D:\\FYP\\PHOTO\\" + std::to_string((i + 1)) + ".bmp";
+						imwrite(img, pic);
+					}
+					else
+						continue;
+				}
+			}
+			std::cout << "Finish? Y/N" << std::endl;
+			std::cin >> finish;
+			if (finish == 'y' || finish == 'Y')break;
 		}
 		else
 		{
@@ -42,7 +47,6 @@ int main()
 		}
 		
 	}
-	getchar();
 
 	return 0;
 }
